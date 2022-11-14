@@ -1,12 +1,16 @@
-<script setup>
-import {ref} from "vue"
-const props = defineProps({
-    element: Object,
-    
-});
-const isClick = ref(false);
-const isHover = ref(false);
+<script>
 
+export default {
+    props: {
+        element: Object
+    },
+    data() {
+        return {
+            isClick: false,
+            isHover: false
+        }
+    }
+}
 </script>
 
 <template>
@@ -20,5 +24,6 @@ button{
     font-size: larger;
     border-radius: 100%;
     width: 2em;
+    cursor: pointer;
 }
 </style>

@@ -1,5 +1,11 @@
-<script setup>
+<script>
 import CustomCalculator from './components/Calculator.vue'
+
+export default {
+    components: {
+        CustomCalculator
+    }
+}
 </script>
 
 <template>

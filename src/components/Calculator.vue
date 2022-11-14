@@ -1,110 +1,114 @@
-<script setup>
-import {ref} from 'vue';
+<script>
+
 import CustomIcon from './CustomIcon.vue';
 import {CalcOperation} from './Operation.js';
-const operation = new CalcOperation();
-const displayValue = ref("0");
-var newInput = false;
-const buttonElement = ref([[
+
+export default{
+    data() {
+        return {
+            operation: new CalcOperation(),
+            displayValue: 0,
+            newInput: true,
+            buttonElement: [[
     {
         key: 'clear',
         element: 'C',
-        function: ()=>{displayValue.value = String(operation.clearInput());},
+        function: ()=>{this.displayValue = String(this.operation.clearInput());},
     },
     {
         key: 'sign',
         element: '+/-',
-        function: ()=>{displayValue.value = String(operation.changeSign(displayValue.value));},
+        function: ()=>{this.displayValue = String(this.operation.changeSign(this.displayValue));},
     },
     {
         key: 'percentage',
         element: '%',
-        function: ()=>{displayValue.value = operation.toPercentage(displayValue.value)},
+        function: ()=>{this.displayValue = this.operation.toPercentage(this.displayValue)},
     },
     {
         key: 'divide',
         element: String.fromCodePoint(247),
-        function: ()=>{displayValue.value = operation.insertOperation('/', displayValue.value)},
+        function: ()=>{this.displayValue = this.operation.insertoperation('/', this.displayValue)},
     },
 ],[
     {
         key: 'one',
         element: '1',
-        function: ()=>{displayValue.value = displayValue.value.length == 1 && displayValue.value == '0' || newInput ? '1': displayValue.value + '1'; newInput = false;}
+        function: ()=>{this.displayValue = this.displayValue.length == 1 && this.displayValue == '0' || this.newInput ? '1': this.displayValue + '1'; this.newInput = false;}
     },
     {
         key: 'two',
         element: '2',
-        function: ()=>{displayValue.value = displayValue.value.length == 1 && displayValue.value == '0' || newInput ? '2': displayValue.value + '2'; newInput = false;}
+        function: ()=>{this.displayValue = this.displayValue.length == 1 && this.displayValue == '0' || this.newInput ? '2': this.displayValue + '2'; this.newInput = false;}
     },
     {
         key: 'three',
         element: '3',
-        function: ()=>{displayValue.value = displayValue.value.length == 1 && displayValue.value == '0' || newInput ? '3': displayValue.value + '3'; newInput = false;}
+        function: ()=>{this.displayValue = this.displayValue.length == 1 && this.displayValue == '0' || this.newInput ? '3': this.displayValue + '3'; this.newInput = false;}
     },
     {
         key: 'times',
         element: 'x',
-        function: ()=>{displayValue.value = operation.insertOperation('*', displayValue.value)},
+        function: ()=>{this.displayValue = this.operation.insertoperation('*', this.displayValue)},
     },
 ],[
     {
         key: 'four',
         element: '4',
-        function: ()=>{displayValue.value = displayValue.value.length == 1 && displayValue.value == '0' || newInput ? '4': displayValue.value + '4'; newInput = false;}
+        function: ()=>{this.displayValue = this.displayValue.length == 1 && this.displayValue == '0' || this.newInput ? '4': this.displayValue + '4'; this.newInput = false;}
     },
     {
         key: 'five',
         element: '5',
-        function: ()=>{displayValue.value = displayValue.value.length == 1 && displayValue.value == '0' || newInput ? '5': displayValue.value + '5'; newInput = false;}
+        function: ()=>{this.displayValue = this.displayValue.length == 1 && this.displayValue == '0' || this.newInput ? '5': this.displayValue + '5'; this.newInput = false;}
     },
     {
         key: 'six',
         element: '6',
-        function: ()=>{displayValue.value = displayValue.value.length == 1 && displayValue.value == '0' || newInput ? '6': displayValue.value + '6'; newInput = false;}
+        function: ()=>{this.displayValue = this.displayValue.length == 1 && this.displayValue == '0' || this.newInput ? '6': this.displayValue + '6'; this.newInput = false;}
     },
     {
         key: 'plus',
         element: '+',
-        function: ()=>{displayValue.value = operation.insertOperation('+', displayValue.value)},
+        function: ()=>{this.displayValue = this.operation.insertoperation('+', this.displayValue)},
     },
 ],[
     {
         key: 'seven',
         element: '7',
-        function: ()=>{displayValue.value = displayValue.value.length == 1 && displayValue.value == '0' || newInput ? '7': displayValue.value + '7'; newInput = false;}
+        function: ()=>{this.displayValue = this.displayValue.length == 1 && this.displayValue == '0' || this.newInput ? '7': this.displayValue + '7'; this.newInput = false;}
     },
     {
         key: 'eight',
         element: '8',
-        function: ()=>{displayValue.value = displayValue.value.length == 1 && displayValue.value == '0' || newInput ? '8': displayValue.value + '8'; newInput = false;}
+        function: ()=>{this.displayValue = this.displayValue.length == 1 && this.displayValue == '0' || this.newInput ? '8': this.displayValue + '8'; this.newInput = false;}
     },
     {
         key: 'nine',
         element: '9',
-        function: ()=>{displayValue.value = displayValue.value.length == 1 && displayValue.value == '0' || newInput ? '9': displayValue.value + '9'; newInput = false;}
+        function: ()=>{this.displayValue = this.displayValue.length == 1 && this.displayValue == '0' || this.newInput ? '9': this.displayValue + '9'; this.newInput = false;}
     },
     {
         key: 'minus',
         element: '-',
-        function: ()=>{displayValue.value = operation.insertOperation('-', displayValue.value)},
+        function: ()=>{this.displayValue = this.operation.insertoperation('-', this.displayValue)},
     },
 ],[
     {
         key: 'zero',
         element: '0',
-        function: ()=>{displayValue.value = displayValue.value.length == 1 && displayValue.value == '0' ? '0': displayValue.value + '0'}
+        function: ()=>{this.displayValue = this.displayValue.length == 1 && this.displayValue == '0' ? '0': this.displayValue + '0'}
     },
     {
         key: 'dot',
         element: '.',
         function: ()=>{
-            for (var i = 0; i < displayValue.value.length; i++) {
-                if (displayValue.value[i] == '.' || displayValue.value.length == 1 && displayValue.value == '0') {
+            for (var i = 0; i < this.displayValue.length; i++) {
+                if (this.displayValue[i] == '.' || this.displayValue.length == 1 && this.displayValue == '0') {
                     break;
                 }
-                else if(i == displayValue.value.length - 1){
-                    displayValue.value += '.';
+                else if(i == this.displayValue.length - 1){
+                    this.displayValue += '.';
                 }
             }
         }
@@ -112,9 +116,16 @@ const buttonElement = ref([[
     {
         key: 'equal',
         element: '=',
-        function: ()=>{displayValue.value = operation.computeResult(displayValue.value); newInput = true},
+        function: ()=>{this.displayValue = this.operation.computeResult(this.displayValue); this.newInput = true},
     },
-],])
+],]
+        }
+    },
+    components: {
+        CustomIcon,
+    }
+}
+
 </script>
 
 <template>

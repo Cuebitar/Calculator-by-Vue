@@ -13,14 +13,17 @@ export class CalcOperation{
     }
 
     changeSign(value) {
-        return -value;
+        if(value.charAt(value.length - 1) == '%') {
+            value = parseFloat(value.substring(0, value.length - 1)) / 100;
+        }
+        return '-' + value;
     }
 
     toPercentage(value) {
         return value.charAt(value.length - 1) != '%'? value + '%' : value.substring(0, value.length - 1);
     }
 
-    insertOperation(operator, value) {
+    insertoperation(operator, value) {
         if(value != 0) {
             this.storage.enqueue(value);
             this.storage.enqueue(operator);
